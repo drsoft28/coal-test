@@ -64,6 +64,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-secondary">reset</button>
 
         </form>
         </div>
@@ -82,11 +83,13 @@
                 $(`#product_name-error`).css('display','none');
                 $(`#qty-error`).css('display','none');
                 $(`#qty-error`).css('display','none');
-                let formData = {
-                    _token:$('[name=_token]').val(),
-                    product_name:$('#productName').val(),
-                    qty:$('#qty').val(),
-                    price:$('#qty').val(),
+                let formData = {};
+                let inputs = $('input[type!="submit"]');
+
+                for (let index = 0; index < inputs.length; index++) {
+                    const element = inputs[index];
+                    console.log($(element),$(element).attr('name'),$(element).val())
+                    formData[$(element).attr('name')]= $(element).val()
                 }
                 $.ajax({
                     type:'post',
